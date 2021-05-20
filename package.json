@@ -4,9 +4,15 @@
   "description": "Rollup plugin to import .html files for lit/lit-element components",
   "main": "dist/plugin.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
-  "keywords": ["rollup-plugin", "lit", "lit-element", "html", "html-minifier"],
+  "keywords": [
+    "rollup-plugin",
+    "lit",
+    "lit-element",
+    "html",
+    "html-minifier"
+  ],
   "author": {
     "name": "Massimo Artizzu",
     "email": "maxart.x@gmail.com"
@@ -20,9 +26,14 @@
   },
   "devDependencies": {
     "@types/html-minifier": "^4.0.0",
-    "rollup": "^2.48.0"
+    "@types/jest": "^26.0.23",
+    "jest": "^26.6.3",
+    "rollup": "^2.48.0",
+    "ts-jest": "^26.5.6"
   },
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "typings": "./dist/plugin.d.ts",
   "repository": {
     "type": "git",

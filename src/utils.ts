@@ -8,7 +8,7 @@ import { TransformResult } from 'rollup';
  * Returns the starting and ending positions of expression chunks inside the
  * HTML code
  */
-const getExpressionPositions = (html: string): Interval[] => {
+export const getExpressionPositions = (html: string): Interval[] => {
   const ast = createSourceFile('x.ts', `\`${html}\``, ScriptTarget.Latest);
   const stat = ast.statements[0] as ExpressionStatement;
   const tpl = stat.expression as TemplateExpression;
@@ -16,13 +16,14 @@ const getExpressionPositions = (html: string): Interval[] => {
 };
 
 /**
+ * Returns whether a value is a `ScriptChunk`
  */
-const isChunk = (value: any): value is ScriptChunk => typeof value?.pos === 'number' && typeof value?.end === 'number';
+export const isChunk = (value: any): value is ScriptChunk => typeof value?.pos === 'number' && typeof value!.end === 'number';
 
 /**
- *
+ * Returns all the intervals for a given Expression
  */
-const getAllChunks = (chunk: ScriptChunk & object): Interval[] => {
+export const getAllChunks = <T extends ScriptChunk>(chunk: T): Interval[] => {
   const subChunks = Object.values(chunk).filter(isChunk);
   if (subChunks.length === 0) {
     return [[chunk.pos, chunk.end]];
@@ -37,7 +38,7 @@ const getAllChunks = (chunk: ScriptChunk & object): Interval[] => {
 /**
  *
  */
-function* getUncoveredIntervals(interval: Interval, chunks: Array<Interval>) {
+export function* getUncoveredIntervals(interval: Interval, chunks: Array<Interval>) {
   const [start, end] = interval;
   let index = start;
   while (index < end) {
@@ -62,15 +63,15 @@ function* getUncoveredIntervals(interval: Interval, chunks: Array<Interval>) {
 /**
  * Returns the row and column of the given linear position inside the given source code
  */
-const getCoords = (source: string, position: number): Interval => {
+export const getCoords = (source: string, position: number): Interval => {
   const rows = source.slice(0, position).split('\n');
   return [rows.length - 1, rows[rows.length - 1].length];
 };
 
 /**
- * Generate the source map for the transformed code, given the souce
+ * Generates the source map for the transformed code, given the souce
  */
-const generateHTMLSourceMap = (html: string, minified: string, transformed: string) => {
+export const generateHTMLSourceMap = (html: string, minified: string, transformed: string) => {
   const rawBits = getExpressionPositions(html);
   const rawUncov = Array.from(getUncoveredIntervals([0, html.length + 1], rawBits));
   const minBits = getExpressionPositions(minified);

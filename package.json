@@ -1,14 +1,17 @@
 {
   "name": "rollup-plugin-html-lit",
   "version": "1.0.0",
-  "description": "",
+  "description": "Rollup plugin to import .html files for lit/lit-element components",
   "main": "dist/plugin.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["rollup-plugin", "lit", "lit-element", "html", "html-minifier"],
+  "author": {
+    "name": "Massimo Artizzu",
+    "email": "maxart.x@gmail.com"
+  },
+  "license": "MIT",
   "dependencies": {
     "html-minifier": "^4.0.0",
     "rollup-pluginutils": "^2.8.2",
@@ -20,5 +23,12 @@
     "rollup": "^2.48.0"
   },
   "files": ["dist/**/*"],
-  "typings": "./dist/plugin.d.ts"
+  "typings": "./dist/plugin.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MaxArt2501/rollup-plugin-html-lit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MaxArt2501/rollup-plugin-html-lit/issues"
+  }
 }

@@ -98,6 +98,6 @@ specified in a special HTML comment, like this:
 
 ## To do
 
-- [ ] Add tests
+- [x] Add tests
 - [ ] Better documentation
 - [ ] Fix the sourcemap

@@ -1,4 +1,4 @@
-import { Options } from "html-minifier";
+import { Options } from 'html-minifier';
 
 export interface ScriptChunk {
   pos: number;

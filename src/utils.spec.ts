@@ -13,6 +13,10 @@ describe("getExpressionPositions", () => {
     const results = getExpressionPositions("<div>${value}</div>");
     expect(results).toEqual([[8, 13]]);
   });
+  it("returns an empty array if there are no template literal expressions inside the HTML code", () => {
+    const results = getExpressionPositions("<div>Static</div>");
+    expect(results).toEqual([]);
+  });
 });
 
 describe("isChunk", () => {

@@ -1,5 +1,6 @@
 import { SourceDescription } from "rollup";
 import { html } from "./plugin";
+import * as utils from "./utils";
 
 describe("Rollup plugin HTML/Lit", () => {
   it('returns a transformer plugin named "html"', () => {
@@ -42,19 +43,29 @@ export default function() {
 }`);
     });
     it("prints the error if one has been thrown", () => {
+      jest.spyOn(utils, "transformHTML").mockImplementation(() => {
+        throw Error("test");
+      });
       jest.spyOn(console, "error");
       const transform: any = html().transform;
-      transform("Incorrectly `escaped` ${backticks}", "/src/a.html");
+      transform("test", "/src/a.html");
       expect((console.error as jest.Mock).mock.calls).toEqual([
-        ["Error:\n\tCannot read property 'flatMap' of undefined"],
+        ["Error:\n\ttest"],
         ["Line:   undefined"],
         ["Column: undefined"],
       ]);
       (console.error as jest.Mock).mockRestore();
+      (utils.transformHTML as jest.Mock).mockRestore();
     });
     it("rethrows the errore if the option `failOnError` is `true`", () => {
+      jest.spyOn(utils, "transformHTML").mockImplementation(() => {
+        throw Error("test");
+      });
       const transform: any = html({ failOnError: true }).transform;
-      expect(() => transform("Incorrectly `escaped` ${backticks}", "/src/a.html")).toThrow();
+      expect(() =>
+        transform("test", "/src/a.html")
+      ).toThrow();
+      (utils.transformHTML as jest.Mock).mockRestore();
     });
   });
 });

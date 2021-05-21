@@ -4,6 +4,7 @@
   "description": "Rollup plugin to import .html files for lit/lit-element components",
   "main": "dist/plugin.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "keywords": [

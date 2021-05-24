@@ -1,10 +1,11 @@
 {
   "name": "rollup-plugin-html-lit",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.0",
   "description": "Rollup plugin to import .html files for lit/lit-element components",
   "main": "dist/plugin.js",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "test": "jest"
   },
   "keywords": [

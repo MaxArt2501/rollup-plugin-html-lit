@@ -130,7 +130,7 @@ export const transformHTML = (html: string, minifierOptions?: Options): Transfor
 
   const header = `import { html } from 'lit-html';\n\nexport default function(${args.join(', ')}) {\n  return html\``;
   const transformed = `${header}${minified}\`;\n}`;
-  const map = generateHTMLSourceMap(html, minified, transformed);
+  const mappings = generateHTMLSourceMap(html, minified, transformed);
 
-  return { code: transformed, map };
+  return { code: transformed, map: { mappings, version: 3, names: [], sources: [null as unknown as string] } };
 };
